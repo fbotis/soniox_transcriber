@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s https://raw.githubusercontent.com/soniox/soniox_examples/master/speech_to_text/python/soniox_realtime.py)",
+      "Bash(uv sync:*)",
+      "Bash(uv run:*)",
+      "Bash(timeout 3 uv run:*)",
+      "Bash(tree:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

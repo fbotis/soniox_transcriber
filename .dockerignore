@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Environment files
+.env
+.env.local
+
+# Documentation
+*.md
+QUICKSTART.md
+VAPI_INTEGRATION.md
+VAPI_QUICKSTART.md
+
+# Test files
+test_*.py
+*_test.py
+tests/
+
+# Other apps (not needed for Vapi server)
+create_vapi_assistant.py
+test_vapi_call.py
+test_vapi_web.html
+
+# Logs
+*.log
+
+# Cache
+.cache/
+uv.lock

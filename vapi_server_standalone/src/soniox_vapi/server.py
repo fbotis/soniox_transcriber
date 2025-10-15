@@ -51,10 +51,12 @@ class VapiTranscriberSession:
             self.soniox_ws = await ws_connect(SONIOX_WEBSOCKET_URL)
             config = self.get_soniox_config()
             await self.soniox_ws.send(json.dumps(config))
-            print(f"✅ Connected to Soniox (sample_rate={config['sample_rate']}, channels={config['num_channels']})")
+            print(
+                f"✅ Connected to Soniox (sample_rate={config['sample_rate']}, channels={config['num_channels']})")
 
             # Start the response handler task NOW that we're connected
-            self.soniox_task = asyncio.create_task(self.process_soniox_responses())
+            self.soniox_task = asyncio.create_task(
+                self.process_soniox_responses())
 
             return True
         except Exception as e:
@@ -77,7 +79,8 @@ class VapiTranscriberSession:
                         "sampleRate": data.get("sampleRate", 16000),
                         "channels": data.get("channels", 2),
                     }
-                    print(f"📥 Received Vapi start message: {self.audio_config}")
+                    print(
+                        f"📥 Received Vapi start message: {self.audio_config}")
 
                     # Connect to Soniox with the audio config
                     await self.connect_to_soniox()
@@ -96,7 +99,8 @@ class VapiTranscriberSession:
             self._audio_count += 1
 
             if self._audio_count % 100 == 0:  # Log every 100 chunks
-                print(f"🎵 Received {self._audio_count} audio chunks ({len(message)} bytes)")
+                print(
+                    f"🎵 Received {self._audio_count} audio chunks ({len(message)} bytes)")
 
             if self.soniox_ws:
                 try:
@@ -123,11 +127,12 @@ class VapiTranscriberSession:
                     res = json.loads(message)
 
                     # Debug: Log all Soniox responses
-                    print(f"🔊 Soniox response: {res}")
+                    # print(f"🔊 Soniox response: {res}")
 
                     # Check for errors from Soniox
                     if res.get("error_code"):
-                        print(f"❌ Soniox error: {res['error_code']} - {res['error_message']}")
+                        print(
+                            f"❌ Soniox error: {res['error_code']} - {res['error_message']}")
                         continue
 
                     # Extract final transcription tokens with speaker info
@@ -145,7 +150,8 @@ class VapiTranscriberSession:
                         transcription = "".join(final_tokens)
 
                         # Remove <end> and <END> markers
-                        transcription = transcription.replace("<end>", "").replace("<END>", "").strip()
+                        transcription = transcription.replace(
+                            "<end>", "").replace("<END>", "").strip()
 
                         # Skip if empty after cleanup
                         if not transcription:
@@ -179,7 +185,8 @@ class VapiTranscriberSession:
                         }
 
                         await self.vapi_ws.send_json(vapi_response)
-                        print(f"📤 Sent to Vapi [{vapi_channel}] (speaker: {speaker_id}): {transcription}")
+                        print(
+                            f"📤 Sent to Vapi [{vapi_channel}] (speaker: {speaker_id}): {transcription}")
 
                     # Check if session finished
                     if res.get("finished"):

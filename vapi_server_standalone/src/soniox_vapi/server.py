@@ -34,11 +34,11 @@ class VapiTranscriberSession:
         """Build Soniox configuration based on Vapi audio settings."""
         config = {
             "api_key": self.api_key,
-            "model": "stt-rt-preview",
+            "model": "stt-rt-v3",
             "audio_format": "pcm_s16le",
             "sample_rate": self.audio_config.get("sampleRate", 16000),
             "num_channels": self.audio_config.get("channels", 2),
-            "language_hints": ["en", "ro"],  # English and Romanian
+            "language_hints": ["ro"],  # English and Romanian
             "enable_endpoint_detection": True,
             "enable_language_identification": False,
             "enable_speaker_diarization": True,  # Enable speaker identification
